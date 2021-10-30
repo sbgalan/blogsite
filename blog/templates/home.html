@@ -133,7 +133,7 @@
 
 						<ul class="post-footer">
 							<li><a><i class="ion-heart"></i>{{ post.likes }}</a></li>
-							<li><a><i class="ion-chatbubble"></i>{{ post.likes }}</a></li>
+							<li><a><i class="ion-chatbubble"></i>{{ post.comments.all.count }}</a></li>
 							{% if allowpost %}
 								<li><a href="{% url 'blog:add-post' post.id %} "><i class="ion-edit"></i></a></li>
 							{% endif %}
