@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    <title>Add New Post</title>
+    <!-- page style -->
+    <link href="{% static 'bona/single-post-2/css/styles.css' %}" rel="stylesheet">
+    <link href="{% static 'bona/single-post-2/css/responsive.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="slider">
+</div><!-- slider -->
+
+<section class="post-area">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-1 col-md-0"></div>
+            <div class="col-lg-10 col-md-12">
+
+                <div class="main-post">
+                    <div class="post-top-area">
+                        <h4 class="title"><b>POST FORM</b></h4>    
+                        <form method="post" action="" class="form-horizontal">
+                            {% csrf_token %}
+                            <div class="form-group form-group-lg">
+                                <label class="col-sm-2 control-label" for="formGroupInputLarge">Category</label>
+                                <div class="col-sm-12">
+                                    <select name="form-category" required="" id="id_category" class="form-control input-lg"d>
+                                        <option value="" selected="">---------</option>
+                                        <option value="Design">Design</option>
+                                        <option value="Health">Health</option>
+                                        <option value="Music">Music</option>
+                                        <option value="Sport">Sport</option>
+                                        <option value="Travel">Travel</option>
+                                        <option value="Technology">Technology</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-lg">
+                                <label class="col-sm-2 control-label" for="formGroupInputLarge">Status</label>
+                                <div class="col-sm-12">
+                                    <select name="form-status" required="" id="id_category" class="form-control input-lg">
+                                        <option value="0">Draft</option>
+                                        <option value="1">Published</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-2 control-label" for="formGroupInputSmall">Title</label>
+                                <div class="col-sm-12">
+                                    <input type="text" value="{{post.title}}" name="form-title" maxlength="200" required="" id="id_title" class="form-control input-lg">
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-2 control-label" for="formGroupInputSmall">Content</label>
+                                <div class="col-sm-12">
+                                    <textarea name="form-content" cols="40" rows="10" required="" id="id_content" class="form-control input-lg"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-2 control-label" for="formGroupInputSmall">Tags</label>
+                                <div class="col-sm-12">
+                                    <textarea name="form-tags" cols="40" rows="3" id="id_tags" class="form-control input-lg" placeholder="separate tags by comma ,"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <button class="submit-btn btn btn-default" type="button" onClick="history.back()"><b>CANCEL</b></button>
+                                <button class="submit-btn btn btn-info" type="submit"><b>SAVE POST</b></button>
+                            </div>
+                        </form>
+
+                    </div><!-- post-top-area -->
+                </div><!-- main-post -->
+            </div><!-- col-lg-8 col-md-12 -->
+        </div><!-- row -->
+    </div><!-- container -->
+</section><!-- post-area -->
+
+
+
+<script language="JavaScript" type="text/javascript">
+$(document).ready(function(){
+    $("input, select, textarea").addClass("form-control input-lg")
+    $('#id_tags').attr('placeholder','separate tags by comma ,')
+            .attr('rows', 3)
+    if("{{post.id}}"){
+        $("[name='form-title']").val("{{ post.title }}")
+        $("[name='form-content']").val("{{ post.content }}")
+        $("[name='form-category']").val("{{ post.category }}")
+        $("[name='form-status']").val("{{ post.status }}")
+        $("[name='form-tags']").val("{{ post.tags }}")
+    }
+
+});
+</script>
+{% endblock %}

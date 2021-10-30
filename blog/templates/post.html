@@ -1,0 +1,223 @@
+	{% extends 'base.html' %}
+	{% load static %}
+	{% block title %}
+		<title>{{ post.title }}</title>
+		<!-- page style -->
+		<link href="{% static 'bona/single-post-2/css/styles.css' %}" rel="stylesheet">
+		<link href="{% static 'bona/single-post-2/css/responsive.css' %}" rel="stylesheet">
+	{% endblock %}
+	{% block link %} 
+		{% if allowdelete %}
+			Admin
+		{% else %}
+			Login
+		{% endif %}
+	{% endblock %}
+	
+
+	{% block content %}
+	<div class="slider">
+	</div><!-- slider -->
+
+	<section class="post-area">
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-lg-1 col-md-0"></div>
+				<div class="col-lg-10 col-md-12">
+
+					<div class="main-post">
+
+						<div class="post-top-area">
+
+							<h5 class="pre-title text-uppercase">{{ post.category }}</h5>
+
+							<h3 class="title"><a href="#"><b>{{ post.title }}</b></a></h3>
+
+							<div class="post-info">
+
+								<div class="left-area">
+									<a class="avatar" href="#"><img src="{% static 'bona/images/avatar-1-120x120.jpg' %}" alt="Profile Image"></a>
+								</div>
+
+								<div class="middle-area">
+									<a class="name" href="#"><b>{{ post.author }}</b></a>
+									<h6 class="date">on {{ post.published }}</h6>
+								</div>
+
+							</div><!-- post-info -->
+
+							<p class="para">{{ post.content }}</p>
+
+						</div><!-- post-top-area -->
+
+						<div class="post-image"><img src="{% static 'bona/images/blog-1-1000x600.jpg' %}" alt="Blog Image"></div>
+
+						<div class="post-bottom-area">
+
+							<!-- <p class="para">{{ post.content }}</p> -->
+							<ul class="tags" id="tags">
+							</ul>
+
+							<div class="post-icons-area">
+								<ul class="post-icons">
+									<li><a href="#" onClick="addlike('{{ post.id }}','{{ post.likes }}')"><i class="ion-heart"></i><span id=likes>{{ post.likes }}</span></a></li>
+									<li><a href="#"><i class="ion-chatbubble"></i>{{ comments.count }}</a></li>
+								</ul>
+
+								<ul class="icons">
+									<li>SHARE : </li>
+									<li><a href="#"><i class="ion-social-facebook"></i></a></li>
+									<li><a href="#"><i class="ion-social-twitter"></i></a></li>
+									<li><a href="#"><i class="ion-social-pinterest"></i></a></li>
+								</ul>
+							</div>
+
+							<div class="post-footer post-info">
+
+								<div class="left-area">
+									<a class="avatar" href="#"><img src="{% static 'bona/images/avatar-1-120x120.jpg' %}" alt="Profile Image"></a>
+								</div>
+
+								<div class="middle-area">
+									<a class="name" href="#"><b>{{ post.author }}</b></a>
+									<h6 class="date">on {{ post.published }}</h6>
+								</div>
+
+							</div><!-- post-info -->
+
+						</div><!-- post-bottom-area -->
+
+					</div><!-- main-post -->
+				</div><!-- col-lg-8 col-md-12 -->
+			</div><!-- row -->
+		</div><!-- container -->
+	</section><!-- post-area -->
+
+	<section class="comment-section center-text">
+		<div class="container">
+			<br>
+			<h4><b>COMMENTS({{ comments.count }})</b></h4>
+			<div class="row">
+
+				<div class="col-lg-2 col-md-0"></div>
+
+				<div class="col-lg-8 col-md-12">
+
+					<div class="commnets-area text-left">
+						{% for com in comments %}
+						<div class="comment">
+
+							<div class="post-info">
+								<div class="left-area">
+									<a class="avatar" href="#"><img src="{% static 'bona/images/avatar-1-120x120.jpg' %}" alt="Profile Image"></a>
+								</div>
+
+								<div class="middle-area">
+									<a class="name" href="#"><b>{{ com.username }}</b></a>
+									<h6 class="date">on {{ com.created }}</h6>
+								</div>
+
+								{% if allowdelete %}
+									<div class="right-area">
+										<h5 class="reply-btn" ><a onClick="confirm('Do you really want to delete comment?')" href="{% url 'blog:delete-comment' com.id %} "><i class="ion-close"></i> Delete</a></h5>
+									</div>
+								{% endif %}
+							</div><!-- post-info -->
+
+							<p>{{ com.comment }}</p>
+
+						</div>
+						{% empty %}
+						<a class="more-comment-btn" href="#"><b>NO COMMENT YET.</b></a>
+						{% endfor %}
+
+					</div><!-- commnets-area -->
+					<!-- <a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</a> -->
+
+				</div><!-- col-lg-8 col-md-12 -->
+
+			</div><!-- row -->
+
+		</div><!-- container -->
+	</section>
+
+	<section class="comment-section center-text">
+		<div class="container">
+			<br>
+			<h4><b>POST COMMENT</b></h4>
+			<div class="row">
+
+				<div class="col-lg-2 col-md-0"></div>
+
+				<div class="col-lg-8 col-md-12">
+					<div class="comment-form">
+						<form method="post" action="">
+							{% csrf_token %}
+							<div class="row">
+								<div class="col-sm-6">
+									<input type="text" aria-required="true" name="contact-form-name" class="form-control"
+										placeholder="Enter your name" aria-invalid="true" required >
+								</div><!-- col-sm-6 -->
+								<div class="col-sm-6">
+									<input type="email" aria-required="true" name="contact-form-email" class="form-control"
+										placeholder="Enter your email" aria-invalid="true" required>
+								</div><!-- col-sm-6 -->
+
+								<div class="col-sm-12">
+									<textarea name="contact-form-message" rows="2" class="text-area-messge form-control"
+										placeholder="Enter your comment" aria-required="true" aria-invalid="false"></textarea >
+								</div><!-- col-sm-12 -->
+								<div class="col-sm-12">
+									<button class="submit-btn" type="submit" id="form-submit"><b>POST COMMENT</b></button>
+								</div><!-- col-sm-12 -->
+
+							</div><!-- row -->
+						</form>
+					</div><!-- comment-form -->
+
+				</div><!-- col-lg-8 col-md-12 -->
+
+			</div><!-- row -->
+
+		</div><!-- container -->
+	</section>
+	
+	<script language="JavaScript" type="text/javascript">
+	$(document).ready(function(){
+		var tags ="{{ post.tags }}"
+		
+		var str = "";
+		if(~tags.indexOf(",")){
+			tags = tags.split(",");
+			jQuery.each(tags, function(index, item) {
+				str = str + "<li><a>"+item+"</a></li>" 
+			});
+				
+		}else{
+			str = "<li><a>"+tags+"</a></li>" 
+		}
+		$("#tags").html(str)
+		console.log(tags)
+		console.log(str)
+	});
+
+	function addlike(i, l){
+		l = parseInt(l) + 1;
+		$.ajax({
+        type: "POST",
+        url: "{% url 'blog:add-like' post.id %} ",
+        data: {
+			id: i, likes: l,
+        },
+        dataType: 'json',
+        success: function (data) {
+            $("#likes").html(l)
+        }
+      });
+	}
+
+	</script>
+	{% endblock %}
+	

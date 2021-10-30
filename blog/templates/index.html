@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+	</head>
+	<body>
+		<h1>My Food Tracker</h1>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Food</th>
+					<th>Meal Time</th>
+					<th>Calories</th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for post in post %}
+				<tr>
+					<td>{{ post.title }}</td>
+					<td>{{ post.author }}</td>
+					<td>{{ post.created }}</td>
+					<td>
+						<a href="" class="btn btn-info">View</a> 
+					</td>
+					<td>
+						<a href="" class="btn btn-primary">Update</a> 
+					</td>
+					<td>
+						<a href="" class="btn btn-danger">Delete</a> 
+					</td>
+				</tr>
+				{% empty %}
+				<tr>
+					<td colspan="6">No meals yet</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</body>
+</html>

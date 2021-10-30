@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="UTF-8">
+		<!-- Font -->
+
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+		<!-- Stylesheets -->
+		{% load static %}
+		<link href="{% static 'bona/common-css/bootstrap.css' %}" rel="stylesheet">
+
+		<link href="{% static 'bona/common-css/swiper.css' %}" rel="stylesheet">
+
+		<link href="{% static 'bona/common-css/ionicons.css' %}" rel="stylesheet">
+		<script src="{% static 'bona/common-js/jquery-3.1.1.min.js' %}"></script>
+		{% block title %}
+		{% endblock %}
+	</head>
+<body >
+
+	<header>
+		<div class="container-fluid position-relative no-side-padding">
+
+			<a href="#" class="logo"><img src="{% static 'bona/images/logo.png' %}" alt="Logo Image"></a>
+
+			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
+
+			<ul class="main-menu visible-on-click" id="main-menu">
+				<li><a href="{% url 'blog:index' %}">Home</a></li>
+				<li><a target=_blank href="/admin">{% block link %}{% endblock %}</a></li>
+				<!-- <li><a href="#" title="Logout?"><i class="ion-ios-person"></i> Hello, {{user.username}}!</a></li> -->
+			</ul><!-- main-menu -->
+			
+			<div class="src-area" style="width: 40% !important;">
+				<form>
+					<div style="display: grid;">
+						<button class="src-btn" type="button"><i class="ion-ios-search-strong"></i></button>
+						<input class="src-input" type="text" placeholder="Search...">
+					</div>
+				</form>
+			</div>
+
+		</div><!-- conatiner -->
+	</header>
+
+	{% block content %}
+	{% endblock %}
+	
+	<footer>
+
+		<div class="container">
+			<div class="row">
+
+				<div class="col-lg-6 col-md-6">
+					<div class="footer-section">
+
+						<a class="logo" href="#"><img src="{% static 'bona/images/logo.png' %}" alt="Logo Image"></a>
+						<p class="copyright">Bona @ 2017. All rights reserved.</p>
+						<p class="copyright">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a>.Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a></p>
+						<ul class="icons">
+							<li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
+							<li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>
+							<li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+							<li><a href="#"><i class="ion-social-vimeo-outline"></i></a></li>
+							<li><a href="#"><i class="ion-social-pinterest-outline"></i></a></li>
+						</ul>
+
+					</div><!-- footer-section -->
+				</div><!-- col-lg-4 col-md-6 -->
+
+				<div class="col-lg-6 col-md-6">
+						<div class="footer-section">
+						<h4 class="title"><b>ABOUT</b></h4>
+						<p>This site was developed by Sun Galan for her Python Programming class. </p>
+					</div><!-- footer-section -->
+				</div><!-- col-lg-4 col-md-6 -->
+
+			</div><!-- row -->
+		</div><!-- container -->
+	</footer>
+
+
+	<!-- SCIPTS -->
+
+	<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+
+	<script src="{% static 'bona/common-js/tether.min.js' %}"></script>
+
+	<script src="{% static 'bona/common-js/bootstrap.js' %}"></script>
+
+	<script src="{% static 'bona/common-js/swiper.js' %}"></script>
+
+	<script src="{% static 'bona/common-js/scripts.js' %}"></script>
+
+</body>
+</html>
